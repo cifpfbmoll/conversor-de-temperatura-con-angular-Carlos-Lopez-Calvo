@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="card">
+    <div class="row">
+      <label for="value">Valor</label>
+      <input id="value" formControlName="value" placeholder="0.00" />
+      <div class="error" *ngIf="form.get('value')?.invalid && form.get('value')?.touched">
+        Introduce un número válido.
+      </div>
+    </div>
+  
+    <div class="row">
+      <label for="from">De</label>
+      <select id="from" formControlName="from">
+        <option [ngValue]="null" disabled>Selecciona</option>
+        <option *ngFor="let u of units" [value]="u">{{ u }}</option>
+      </select>
+    </div>
+  
+    <div class="row">
+      <label for="to">A</label>
+      <select id="to" formControlName="to">
+        <option [ngValue]="null" disabled>Selecciona</option>
+        <option *ngFor="let u of units" [value]="u">{{ u }}</option>
+      </select>
+    </div>
+  
+    <button type="submit" [disabled]="form.invalid">Convertir</button>
+  </form>
+  
+  <div class="result" *ngIf="result">
+    Resultado: {{ result.input }} {{ result.from }} = {{ result.output }} {{ result.to }}
+  </div>
